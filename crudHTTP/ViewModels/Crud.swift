@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import SwiftUI
 
 class Crud: ObservableObject {
    @Published var mensaje: String = ""
@@ -59,5 +60,36 @@ class Crud: ObservableObject {
             }
          }
       }
+   }
+   
+   func save2(titulo: String, contenido: String, image: UIImage){
+      let parametros: Parameters = [
+         "titulo":titulo,
+         "contenido":contenido,
+      ]
+      
+      guard let url = URL(string: "http://localhost/proyecto/crud.save.php") else {return}
+      
+      guard let imageData = image.pngData() else {return}
+      let nombreImage = UUID().uuidString
+      
+      DispatchQueue.main.async {
+         AF.upload(multipartFormData: { MultipartFormData in
+            MultipartFormData.append(imageData, withName: "image", fileName: "\(nombreImage).png", mimeType: "image/png")
+            
+            for(key, val) in parametros {
+               MultipartFormData.append((val as AnyObject).data(using: String.Encoding.utf8.rawValue)!, withName: key)
+            }
+            
+            
+         }, to: url, method: .post).uploadProgress{ Progress in
+            print("DEBUG: EL PRGRESS", Progress.fractionCompleted*100)
+            
+         }.response{ response in
+            self.mensaje = "Post guardado con exito"
+            self.show = true
+         }
+      }
+      
    }
 }

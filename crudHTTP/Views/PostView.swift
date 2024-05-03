@@ -31,9 +31,16 @@ struct PostView: View {
           TextEditor(text: $contenido)
           
           Button {
-             crud.save(titulo: titulo, contenido: contenido)
+             
+             if image == nil {
+                crud.save(titulo: titulo, contenido: contenido)
+             }else{
+                crud.save2(titulo: titulo, contenido: contenido, image: inputImage!)
+             }
+             
              titulo = ""
              contenido = ""
+             inputImage = nil
           } label: {
              Text("Guardar")
           }.alert(crud.mensaje,isPresented: $crud.show) {
