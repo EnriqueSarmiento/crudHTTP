@@ -11,13 +11,14 @@ struct DetailView: View {
    
    var crudItem: Post
    @StateObject var crud = Crud()
+   @State private var show: Bool = false
    
     var body: some View {
        VStack{
           CeldaView(titulo:"", contenido: crudItem.contenido, image: crudItem.imagen)
           HStack {
              Button {
-                <#code#>
+                show.toggle()
              } label: {
                 Text("Editar")
              }.buttonStyle(BorderedButtonStyle())
@@ -33,6 +34,9 @@ struct DetailView: View {
           .navigationTitle(crudItem.titulo)
           .alert(crud.mensaje,isPresented: $crud.show) {
              Button("Aceptar", role: .none){}
+          }
+          .sheet(isPresented: $show) {
+             EditView(crudItem: crudItem)
           }
     }
 }

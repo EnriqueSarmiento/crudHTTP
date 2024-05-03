@@ -33,7 +33,7 @@ struct PostView: View {
           Button {
              
              if image == nil {
-                crud.save(titulo: titulo, contenido: contenido)
+                crud.save(titulo: titulo, contenido: contenido, id: "", editar: false)
              }else{
                 crud.save2(titulo: titulo, contenido: contenido, image: inputImage!)
              }

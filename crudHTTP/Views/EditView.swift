@@ -8,11 +8,30 @@
 import SwiftUI
 
 struct EditView: View {
+   var crudItem: Post
+   
+   @State private var titulo: String = ""
+   @State private var contenido: String = ""
+   @StateObject private var crud = Crud()
+   
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
+       Form{
+          TextField("Titulo", text: $titulo)
+             .onAppear{
+                titulo = crudItem.titulo
+             }
+         
+          TextEditor(text: $contenido)
+             .onAppear{
+                contenido = crudItem.contenido
+             }
+          
+          Button {
+             crud.save(titulo: titulo, contenido: contenido, id: crudItem.id, editar: true)
+          } label: {
+             Text("Editar Post")
+          }
 
-#Preview {
-    EditView()
+       }
+    }
 }

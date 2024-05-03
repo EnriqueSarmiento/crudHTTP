@@ -13,14 +13,23 @@ class Crud: ObservableObject {
    @Published var mensaje: String = ""
    @Published var show: Bool = false
    @Published var posts: [Post] = [Post]()
+   var urlString = ""
    
-   func save(titulo: String, contenido: String){
+   
+   func save(titulo: String, contenido: String, id: String, editar: Bool){
       let parametros: Parameters = [
          "titulo":titulo,
-         "contenido":contenido
+         "contenido":contenido,
+         "id":id
       ]
       
-      guard let url = URL(string: "http://localhost/proyecto/crud/save.php") else {return}
+      if editar {
+         urlString = "http://localhost/proyecto/crud/edit.php"
+      }else{
+         urlString = "http://localhost/proyecto/crud/save.php"
+      }
+      
+      guard let url = URL(string: urlString) else {return}
       
       DispatchQueue.main.async {
          // here we use alamofire (juts like axios) to create de request post to our endpoint
