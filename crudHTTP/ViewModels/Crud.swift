@@ -114,4 +114,53 @@ class Crud: ObservableObject {
             }
          }
    }
+   
+   func delete(id: String, nombre_imagen: String){
+      let parametros: Parameters = [
+         "id":id,
+         "nombre_imagen":nombre_imagen
+      ]
+      
+      guard let url = URL(string: "http://localhost/proyecto/crud/delete.php") else {return}
+      
+      DispatchQueue.main.async {
+         // here we use alamofire (juts like axios) to create de request post to our endpoint
+         AF.request(url, method: .post, parameters: parametros).responseData { response in
+            switch response.result {
+               // in case of everything is fine
+            case .success(let data):
+               // we take the response and parsed as a Json object
+               do {
+                  let json = try JSONSerialization.jsonObject(with: data)
+                  let resultJson = json as! NSDictionary
+                  
+                  // here we extract the value of the json object we transformed
+                  guard let res = resultJson.value(forKey: "respuesta") else {return}
+                  
+                  print("DEBUG: la respuesta de la api aqui ", res)
+                  
+                  if res as! String == "success" {
+                     self.mensaje = "Post eliminado con exito"
+                     self.show = true
+                  }else{
+                     self.mensaje = "Hubo un error, intentalo mas tarde"
+                     self.show = true
+                  }
+                  
+               } catch let error as NSError {
+                  print("DEBUG: el error catch ====>", error.localizedDescription)
+                  self.mensaje = "Hubo un error, intentalo mas tarde"
+                  self.show = true
+               }
+               
+            case .failure(let error):
+               print("DEBUG: el error failure ====>", error.localizedDescription)
+               self.mensaje = "Hubo un error, intentalo mas tarde"
+               self.show = true
+               break
+               
+            }
+         }
+      }
+   }
 }

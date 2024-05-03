@@ -14,7 +14,9 @@ struct HomeView: View {
       NavigationView{
          List{
             ForEach(crud.posts, id: \.id){ item in
-               CeldaView(titulo: item.titulo, contenido: item.contenido, image: item.imagen)
+               NavigationLink(destination: DetailView(crudItem: item)) {
+                  CeldaView(titulo: item.titulo, contenido: item.contenido, image: item.imagen)
+               }
             }
          }.navigationTitle("Crud")
             .listStyle(.plain)
