@@ -12,6 +12,7 @@ import SwiftUI
 class Crud: ObservableObject {
    @Published var mensaje: String = ""
    @Published var show: Bool = false
+   @Published var posts: [Post] = [Post]()
    
    func save(titulo: String, contenido: String){
       let parametros: Parameters = [
@@ -19,7 +20,7 @@ class Crud: ObservableObject {
          "contenido":contenido
       ]
       
-      guard let url = URL(string: "http://localhost/proyecto/crud.save.php") else {return}
+      guard let url = URL(string: "http://localhost/proyecto/crud/save.php") else {return}
       
       DispatchQueue.main.async {
          // here we use alamofire (juts like axios) to create de request post to our endpoint
@@ -68,7 +69,7 @@ class Crud: ObservableObject {
          "contenido":contenido,
       ]
       
-      guard let url = URL(string: "http://localhost/proyecto/crud.save.php") else {return}
+      guard let url = URL(string: "http://localhost/proyecto/crud/save.php") else {return}
       
       guard let imageData = image.pngData() else {return}
       let nombreImage = UUID().uuidString
@@ -91,5 +92,26 @@ class Crud: ObservableObject {
          }
       }
       
+   }
+   
+   func getData () {
+      AF.request("http://localhost/proyecto/crud/select.php")
+         .responseData { response in
+            switch response.result {
+            case .success(let data):
+               do {
+                  let json = try JSONDecoder().decode([Post].self, from: data)
+                  DispatchQueue.main.async{
+                     print("DEBUG: el json", json)
+                     self.posts = json
+                  }
+               } catch let error as NSError {
+                  print("DEBUG: error al mostrar el json", error.localizedDescription)
+               }
+               
+            case .failure(let error):
+               print("debug: HUBO UN ERROR", error.localizedDescription)
+            }
+         }
    }
 }
