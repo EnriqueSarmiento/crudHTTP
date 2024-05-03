@@ -20,6 +20,7 @@
 		3E9C05F82BE2E25100651A4D /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9C05F72BE2E25100651A4D /* DetailView.swift */; };
 		3E9C05FA2BE2E26700651A4D /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9C05F92BE2E26700651A4D /* Post.swift */; };
 		3E9C05FC2BE2E27600651A4D /* Crud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9C05FB2BE2E27600651A4D /* Crud.swift */; };
+		3EF3AD612BE51CF70023530B /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF3AD602BE51CF70023530B /* ImagePicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		3E9C05F72BE2E25100651A4D /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		3E9C05F92BE2E26700651A4D /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		3E9C05FB2BE2E27600651A4D /* Crud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crud.swift; sourceTree = "<group>"; };
+		3EF3AD602BE51CF70023530B /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 				3E9C05DC2BE2DCF600651A4D /* Assets.xcassets */,
 				3E9C05DE2BE2DCF600651A4D /* Preview Content */,
 				3E9C05EC2BE2DF3C00651A4D /* Readme.md */,
+				3EF3AD602BE51CF70023530B /* ImagePicker.swift */,
 			);
 			path = crudHTTP;
 			sourceTree = "<group>";
@@ -199,6 +202,7 @@
 				3E9C05F22BE2E21D00651A4D /* HomeView.swift in Sources */,
 				3E9C05F82BE2E25100651A4D /* DetailView.swift in Sources */,
 				3E9C05F62BE2E24400651A4D /* EditView.swift in Sources */,
+				3EF3AD612BE51CF70023530B /* ImagePicker.swift in Sources */,
 				3E9C05FC2BE2E27600651A4D /* Crud.swift in Sources */,
 				3E9C05DB2BE2DCEF00651A4D /* ContentView.swift in Sources */,
 				3E9C05F42BE2E22800651A4D /* PostView.swift in Sources */,
